@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="google-signin-client_id" content="콘텐트 입력">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
+<script
+	src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+	charset="utf-8"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+
+
+
+<title>로그인 페이지 입니다</title>
+</head>
+<body>
+
+	<section class="py-5">
+		<div class="login">
+			<h1>LOGIN</h1>
+			<h3>WELCOME BACK</h3>
+			<form>
+				<table>
+					<tr>
+
+						<td><input type="text" name="userId" placeholder="아이디"
+							required /><br></td>
+					</tr>
+					<tr>
+						<td><input type="text" name="userPw" placeholder="패스워드"
+							required /></td>
+					</tr>
+				</table>
+				<button onclick="">로그인</button>
+		</div>
+
+		<ul>
+			<li><a href="./findid.html">아이디찾기</a></li>
+			<li><a href="./findpasswd.html">비밀번호찾기</a></li>
+			<li><a href="./join.html">회원가입</a></li>
+		</ul>
+		
+		
+		<div id="naver_id_login"></div>
+
+		<script type="text/javascript">
+			var clientId = "FN4pSAzCFYHKVjsWTodG";
+			var callbackUrl = "http://localhost:8080/naverLogin";
+			var naver_id_login = new naver_id_login(clientId, callbackUrl);
+			var state = naver_id_login.getUniqState();
+			naver_id_login.setButton("white", 3, 40);
+			naver_id_login.setDomain("localhost:8000/BBS/main.jsp");
+			naver_id_login.setState(state);
+			naver_id_login.setPopup();
+			naver_id_login.init_naver_id_login();
+		</script>
+
+
+		<script type="text/javascript">
+			var clientId = "FN4pSAzCFYHKVjsWTodG";
+			var callbackUrl = "http://localhost:8080/naverLogin";
+			var naver_id_login = new naver_id_login(clientId, callbackUrl);
+			// 접근 토큰 값 출력
+			alert(naver_id_login.oauthParams.access_token);
+			// 네이버 사용자 프로필 조회
+			naver_id_login.get_naver_userprofile("naverSignInCallback()");
+			// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+			function naverSignInCallback() {
+				alert(naver_id_login.getProfileData('email'));
+				alert(naver_id_login.getProfileData('nickname'));
+				alert(naver_id_login.getProfileData('age'));
+			}
+		</script>
+
+
+		</form>
+	</section>
+
+	<script src="./js/portal.js"></script>
+	<script src="../js/naverLogin.js"></script>
+
+</body>
+</html>

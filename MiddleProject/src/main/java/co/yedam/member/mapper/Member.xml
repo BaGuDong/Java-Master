@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+<mapper namespace="co.yedam.member.mapper.MemberMapper">
+	<insert id="insertMember" parameterType="member">
+		insert into member
+		(user_id,user_name,user_pw,address1,address2,address3,address4,user_phone,user_email,user_resp)
+		values
+		(#{userId},#{userName},#{userPassword},#{address1},#{address2},#{address3},#{address4},#{userPhone},#{userEmail},#{userResp})
+	</insert>
+
+
+	<select id="selectMember" resultType="member">
+		select *
+		from member
+		where user_id = #{userId}
+		and user_pw = #{userPassword}
+	</select>
+
+	<select id="selectMember2" resultType="member">
+		select *
+		from member
+		where user_id = #{userId}
+	</select>
+    
+    <select id="ckeckId" resultType="member">
+	SELECT COUNT(*) 
+	FROM MEMBER 
+	WHERE MID = #{mId}
+	</select>
+</mapper>
